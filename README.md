@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project for lab.
+
+## About this project
+
+this pro
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# npm
+npm install
+# yarn
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Second, run docker container:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# first time run
+docker-compose up -d --build
+# already have container
+docker-compose up -d
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Thirdly, generate SQL files, migrate and seed data:
 
-## Learn More
+```bash
+# generate database schema
+npm run db:generate
 
-To learn more about Next.js, take a look at the following resources:
+# migrate db
+npm run db:migrate
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# seed mock data to db
+npm run db:seed
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Web usage
+open [http:localhost:3000](http:localhost:3000)
 
-## Deploy on Vercel
+go to signup then signin it will redirect to home page and play with it.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Signup page: [http:localhost:3000/signup](http:localhost:3000/signup)
+- Signin page: [http:localhost:3000/signin](http:localhost:3000/sugnin)
+- Home page: [http:localhost:3000](http:localhost:3000) *protected route*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Offset pagination
+- Sort by postedAt *DESC* or *ASC*
+- Click tag to filter by tag
+
+## Test
+
+```bash
+npm run test
+```
+
+## Check list
+- [x] Front-end & back-end [**Nextjs14**](https://orm.drizzle.team/)
+- [x] Typescript
+- [x] Database **Postgresql**
+- [x] Database ORM [**Drizzle**](https://orm.drizzle.team/)
+- [x] Dockerfile & Docker-compose
+- [x] Javascript test [**vitest**](https://vitest.dev/)
+
+### Postgresql Database with drizzle ORM
+- [x] Post table schema
+- [x] User table schema
+- [x] Database migration
+- [x] Database seeding
+
+### Web functionality with Nextjs, Next-auth & tailwindCss
+- [x] Sign-in
+- [x] Sign-up
+- [x] Render posts
+- [x] Render post detail
+- [x] Sort by postedAt date
+- [x] Filter by tags (click a tag on card)
+- [ ] Search by title
+
+
