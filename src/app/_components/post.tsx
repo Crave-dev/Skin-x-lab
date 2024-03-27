@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Tag from "./tag";
+import { useTag } from "./tag.provider";
 
 interface Props {
     id: number;
@@ -14,6 +15,8 @@ interface Props {
 
 function Post({ id, title, content, postedAt, postedBy, tags }: Props) {
     const [open, setOpen] = useState(false)
+    const tagSet = useTag()
+
     return (<div className="flex flex-col rounded-xl shadow-xl bg-white p-6 gap-4" tabIndex={0}>
     <p title={title} className="font-medium text-xl">{title}</p>
     <div>
@@ -23,7 +26,7 @@ function Post({ id, title, content, postedAt, postedBy, tags }: Props) {
     <div className="flex justify-between">
         <ul className="flex gap-2">
             {tags?.map((tag) => {
-                return <Tag type='openable' value={tag} key={tag} />
+                return <Tag type='openable' value={tag} key={tag} isFiltered={tagSet.has(tag)} />
             })}
         </ul>
         <span>By {postedBy} | <time dateTime={postedAt.toISOString()}>{postedAt.toLocaleDateString()}</time></span>

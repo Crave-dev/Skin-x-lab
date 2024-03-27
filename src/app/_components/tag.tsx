@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { CSSProperties } from "react"
+import { useTag } from "./tag.provider"
 
 interface BaseProps {
     style?: CSSProperties
@@ -14,9 +15,11 @@ interface ClosableProps {
 
 interface OpenableProps {
     type: 'openable'
+    isFiltered: boolean
 }
 
 function Tag(props: BaseProps & (ClosableProps | OpenableProps)) {
+    const tagSet = useTag()
     const pathname = usePathname()
     const router = useRouter()
     const searchParams = useSearchParams()
@@ -26,15 +29,8 @@ function Tag(props: BaseProps & (ClosableProps | OpenableProps)) {
             <span>{props?.value}</span>
             <button className="w-4 h-4" onClick={(e) => {
                 const params = new URLSearchParams(searchParams)
-                const oldTags = [...searchParams.getAll('tag')]
                 params.delete('tag', props.value)
-                oldTags?.forEach((tag) => {
-                    if (tag !== props?.value) {
-                        params.append('tag', tag)
-                    }
-                })
-                console.log(params.toString(), 'params.toString()')
-                params.delete('page', props.value)
+                params.set('page', '1')
                 router.replace(pathname + `?${params.toString()}`)
             }}>
                 <svg height="512px" viewBox="0 0 512 512" width="512px" className="w-4 h-4">
@@ -46,13 +42,15 @@ function Tag(props: BaseProps & (ClosableProps | OpenableProps)) {
 
     return (<button 
             onClick={(e) => {
+                if (tagSet.has(props.value)) return
                 const params = new URLSearchParams(searchParams)
                 params.append('tag', props.value)
-                params.delete('page', props.value)
+                params.set('page', '1')
                 router.replace(pathname + `?${params.toString()}`)
             }}
+            disabled={props?.isFiltered}
             style={props?.style}
-            className="px-2 rounded-lg border border-[#ccc] hover:contrast-0 hover:underline"
+            className="px-2 rounded-lg border border-[#ccc] hover:contrast-0 hover:underline disabled:contrast-100 disabled:border-[#000] disabled:no-underline"
         >
             {props?.value}
         </button>)

@@ -6,6 +6,11 @@ const nextConfig = {
         config.externals = [...config.externals, 'bcrypt'];
         return config;
     },
+    logging: {
+        fetches: {
+            fullUrl: true
+        }
+    }
 };
 
 export default nextConfig;

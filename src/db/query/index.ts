@@ -1,4 +1,4 @@
-import { and, arrayContains, asc, desc, eq, ilike, or } from 'drizzle-orm'
+import { and, arrayContains, asc, count, desc, eq, ilike, or } from 'drizzle-orm'
 import { db } from '../'
 import * as schema from '../schema'
 
@@ -17,6 +17,12 @@ export async function getUserFromEmail(email: string) {
     return db.query.users.findFirst({
         where: (user) => eq(user.email, email) 
     })
+}
+
+export async function countPosts() {
+    return db
+        .select({ count: count() })
+        .from(schema.post)
 }
 
 export async function getPosts({ sort, limit, offset, tags, search }: { limit: number; offset: number; sort: 'DESC' | 'ASC'; tags?: string[], search?: string }) {
