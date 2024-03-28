@@ -7,13 +7,15 @@ import SortBy from "./_components/sort";
 import { unstable_cache } from 'next/cache';
 import Pagination from "./_components/pagination";
 import { TagProvider } from "./_components/tag.provider";
+import Search from "./_components/search";
 
 const postCountCache = unstable_cache(async () => countPosts(), ['post-count'])
 
 export default async function Home(props: { searchParams: {
   tag?: string | string[]
   sort?: 'DESC' | 'ASC',
-  page?: string
+  page?: string,
+  search?: string
 } }) {
   const session = await auth()
 
@@ -23,6 +25,7 @@ export default async function Home(props: { searchParams: {
 
   const limit = 10
   const page = Number(props?.searchParams?.page) || 1
+  const search = props?.searchParams?.search
   const pageOffset = (page - 1) * limit
 
   const tags = props?.searchParams?.tag ? Array.isArray(props?.searchParams?.tag) ? props?.searchParams?.tag : [props?.searchParams?.tag] : undefined
@@ -32,6 +35,7 @@ export default async function Home(props: { searchParams: {
     offset: pageOffset,
     sort: props?.searchParams?.sort || 'DESC',
     tags,
+    search,
   })])
 
   return (
@@ -53,6 +57,7 @@ export default async function Home(props: { searchParams: {
           </h2>
           <SortBy />
         </section>
+        <Search />
         {
           hasTags && (
             <section className="flex flex-wrap gap-4 py-4">
