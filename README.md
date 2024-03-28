@@ -1,8 +1,6 @@
-This project for lab.
-
 ## About this project
 
-this pro
+This project for lab and interview.
 
 ## Getting Started
 
@@ -38,16 +36,17 @@ npm run db:seed
 ```
 
 ## Web usage
+
 open [http:localhost:3000](http:localhost:3000)
 
 go to signup then signin it will redirect to home page and play with it.
 
 - Signup page: [http:localhost:3000/signup](http:localhost:3000/signup)
 - Signin page: [http:localhost:3000/signin](http:localhost:3000/sugnin)
-- Home page: [http:localhost:3000](http:localhost:3000) *protected route*
+- Home page: [http:localhost:3000](http:localhost:3000) _protected route_
 
 - Offset pagination
-- Sort by postedAt *DESC* or *ASC*
+- Sort by postedAt _DESC_ or _ASC_
 - Click tag to filter by tag
 
 ## Test
@@ -57,6 +56,7 @@ npm run test
 ```
 
 ## Check list
+
 - [x] Front-end & back-end [**Nextjs14**](https://orm.drizzle.team/)
 - [x] Typescript
 - [x] Database **Postgresql**
@@ -65,18 +65,18 @@ npm run test
 - [x] Javascript test [**vitest**](https://vitest.dev/)
 
 ### Postgresql Database with drizzle ORM
+
 - [x] Post table schema
 - [x] User table schema
 - [x] Database migration
 - [x] Database seeding
 
 ### Web functionality with Nextjs, Next-auth & tailwindCss
+
 - [x] Sign-in
 - [x] Sign-up
 - [x] Render posts
 - [x] Render post detail
 - [x] Sort by postedAt date
 - [x] Filter by tags (click a tag on card)
-- [ ] Search by title
-
-
+- [x] Search by title & postedBy
