@@ -13,7 +13,17 @@ npm install
 yarn
 ```
 
-Second, run docker container:
+Second, create .env.local by following .env.example
+```
+POSTGRES_DB=skin_x
+POSTGRES_USER=root
+POSTGRES_PASSWORD=1234
+
+# secret for JWT
+AUTH_SECRET=ASDgsf12dasd123vsd
+```
+
+Third, run docker container:
 
 ```bash
 # first time run
